@@ -11,4 +11,8 @@ PJ_RPI.h
 /home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Examples/exb/Source/PJ_RPI.h
 stdio.h
 -
+stdlib.h
+-
+mariadb/mysql.h
+-
 
