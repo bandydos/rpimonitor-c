@@ -1,4 +1,4 @@
-# Install script for directory: /home/pi/trailer/school/embedded/rpimonitor-c/a/monitor
+# Install script for directory: /home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,11 +38,11 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/pi/trailer/school/embedded/rpimonitor-c/a/monitor/Build/libPJ_RPI.a")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Build/libPJ_RPI.a")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES "/home/pi/trailer/school/embedded/rpimonitor-c/a/monitor/PJ_RPI.h")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES "/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/PJ_RPI.h")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -53,5 +53,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/pi/trailer/school/embedded/rpimonitor-c/a/monitor/Build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

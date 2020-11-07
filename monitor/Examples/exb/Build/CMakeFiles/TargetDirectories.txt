@@ -1,0 +1,3 @@
+/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Examples/exb/Build/CMakeFiles/rebuild_cache.dir
+/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Examples/exb/Build/CMakeFiles/Blink.dir
+/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Examples/exb/Build/CMakeFiles/edit_cache.dir

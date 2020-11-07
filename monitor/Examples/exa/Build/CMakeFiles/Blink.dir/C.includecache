@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Examples/exa/Source/main.c
+PJ_RPI.h
+/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Examples/exa/Source/PJ_RPI.h
+stdio.h
+-
+

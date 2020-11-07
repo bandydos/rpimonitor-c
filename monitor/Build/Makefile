@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pi/trailer/school/embedded/rpimonitor-c/a/monitor
+CMAKE_SOURCE_DIR = /home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pi/trailer/school/embedded/rpimonitor-c/a/monitor/Build
+CMAKE_BINARY_DIR = /home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,9 +126,9 @@ install/local/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/trailer/school/embedded/rpimonitor-c/a/monitor/Build/CMakeFiles /home/pi/trailer/school/embedded/rpimonitor-c/a/monitor/Build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Build/CMakeFiles /home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/trailer/school/embedded/rpimonitor-c/a/monitor/Build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
