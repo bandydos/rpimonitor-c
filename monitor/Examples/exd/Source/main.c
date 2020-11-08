@@ -12,6 +12,13 @@ unsigned int port = 3306;
 static char *unix_socket = NULL;
 unsigned int flag = 0;
 
+void finish_with_error(MYSQL *con)
+{
+	fprintf(stderr, "/s\n", mysql_error(con));
+	mysql_close(con);
+	exit(1);
+}
+
 int main()
 {
 	if (map_peripheral(&gpio) == -1)
@@ -22,25 +29,30 @@ int main()
 
 	MYSQL *conn = mysql_init(NULL);
 
-	if (!(mysql_real_connect(conn, host, user, pwd, dbname, port, unix_socket, flag)))
+	if (mysql_real_connect(conn, host, user, pwd, dbname, port, unix_socket, flag) == NULL)
 	{
-		fprintf(stderr, "\nError: %s [%d]\n", mysql_error(conn), mysql_errno(conn));
-		exit(1);
+		finish_with_error(conn);
 	}
 
-	printf("Connection succesfull.\n");
-
-	MYSQL_RES *res;
-	MYSQL_ROW row;
-
-	mysql_query(conn, "SELECT * FROM rpimon");
-
-	res = mysql_store_result(conn);
-
-	while(row = mysql_fetch_row(res)){
-		printf("%s\t%s\t%s\n", row[0], row[1], row[2]);
+	if (mysql_query(conn, "INSERT INTO `rpimon` (`id`, `status`, `logtime`) VALUES (NULL, 'off', CURRENT_TIME());"))
+	{
+		finish_with_error(conn);
 	}
 
+	if (mysql_query(conn, "SELECT * FROM rpimon"))
+	{
+		finish_with_error(conn);
+	}
+
+	MYSQL_RES *res = mysql_store_result(conn); // Store results.
+	MYSQL_ROW row; // MySQL row.
+
+	while (row = mysql_fetch_row(res))
+	{
+		printf("%s\t%s\t%s\n", row[0], row[1], row[2]); // Print rows.
+	}
+
+	// Free the resources.
 	mysql_free_result(res);
 	mysql_close(conn);
 
