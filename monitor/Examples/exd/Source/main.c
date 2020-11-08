@@ -12,6 +12,7 @@ unsigned int port = 3306;
 static char *unix_socket = NULL;
 unsigned int flag = 0;
 
+// Function to avoid unnecessary repitition.
 void finish_with_error(MYSQL *con)
 {
 	fprintf(stderr, "/s\n", mysql_error(con));
@@ -27,50 +28,67 @@ int main()
 		return -1;
 	}
 
-	MYSQL *conn = mysql_init(NULL);
+	// Create a MYSQL connection.
+	MYSQL *connection = mysql_init(NULL);
 
-	if (mysql_real_connect(conn, host, user, pwd, dbname, port, unix_socket, flag) == NULL)
+	// Connect.
+	if (mysql_real_connect(connection, host, user, pwd, dbname, port, unix_socket, flag) == NULL)
 	{
-		finish_with_error(conn);
+		finish_with_error(connection);
 	}
 
-	if (mysql_query(conn, "INSERT INTO `rpimon` (`id`, `status`, `logtime`) VALUES (NULL, 'off', CURRENT_TIME());"))
+	// Select by query.
+	if (mysql_query(connection, "SELECT * FROM rpimon"))
 	{
-		finish_with_error(conn);
+		finish_with_error(connection);
 	}
 
-	if (mysql_query(conn, "SELECT * FROM rpimon"))
-	{
-		finish_with_error(conn);
-	}
+	MYSQL_RES *res = mysql_store_result(connection); // Store results.
+	MYSQL_ROW row;									 // MySQL row.
 
-	MYSQL_RES *res = mysql_store_result(conn); // Store results.
-	MYSQL_ROW row; // MySQL row.
+	int num_fields = mysql_num_fields(res); // Get number of columns in table.
 
 	while (row = mysql_fetch_row(res))
 	{
-		printf("%s\t%s\t%s\n", row[0], row[1], row[2]); // Print rows.
+		for (int i = 0; i < num_fields; i++) // Loop columns.
+		{
+			printf("%s\t ", row[i] ? row[i] : "NULL"); // If something => print.
+		}
+		printf("\n");
 	}
 
 	// Free the resources.
 	mysql_free_result(res);
-	mysql_close(conn);
+	mysql_close(connection);
 
-	return EXIT_SUCCESS;
+	// Define gpio 17 as input
+	//INP_GPIO(17);
 
-	// Define gpio 17 as output
-	/*INP_GPIO(17);
-	OUT_GPIO(17);
+	char status = 0;
+	//char operation[50];
 
 	while (1)
 	{
-		// Toggle 17 (blink a led!)
-		GPIO_SET = 1 << 17;
-		printf("SET\n");
-		sleep(1);
+		status = GPIO_READ(17);
+		if (status)
+		{
+			return "on";
+		}
+		else
+		{
+			return "off";
+		}
+		//status ? "on" : "off";
+		// Insert by query.
 
-		GPIO_CLR = 1 << 17;
-		printf("CLR\n");
-		sleep(1);
-	}*/
+		// nog fixen dat status kan meegegeven worden in query
+		if (mysql_query(connection, "INSERT INTO `rpimon` (`id`, `status`, `logtime`) VALUES (NULL, %s, CURRENT_TIME())", status))
+		{
+			finish_with_error(connection);
+		}
+
+		sleep(10);
+	}
+
+	return EXIT_SUCCESS;
 }
