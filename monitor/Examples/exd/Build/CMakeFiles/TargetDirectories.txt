@@ -1,7 +1,0 @@
-/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Examples/exd/Build/CMakeFiles/install/strip.dir
-/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Examples/exd/Build/CMakeFiles/edit_cache.dir
-/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Examples/exd/Build/CMakeFiles/rebuild_cache.dir
-/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Examples/exd/Build/CMakeFiles/list_install_components.dir
-/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Examples/exd/Build/CMakeFiles/rpimon.dir
-/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Examples/exd/Build/CMakeFiles/install.dir
-/home/pi/trailer/school/embedded/projects/rpimonitor-c/a/monitor/Examples/exd/Build/CMakeFiles/install/local.dir
