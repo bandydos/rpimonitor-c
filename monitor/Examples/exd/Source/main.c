@@ -15,7 +15,7 @@ unsigned int flag = 0;
 // Function to avoid unnecessary repitition.
 void finish_with_error(MYSQL *con)
 {
-	fprintf(stderr, "/s\n", mysql_error(con));
+	fprintf(stderr, "%s\n", mysql_error(con));
 	mysql_close(con);
 	exit(1);
 }
@@ -57,38 +57,42 @@ int main()
 		printf("\n");
 	}
 
+	int pin = 21;  // Pin.
+	INP_GPIO(pin); // Define pin as input.
+
+	char stat[11];
+	char query[501];
+
+	while (1)
+	{
+		if (GPIO_READ(pin))
+		{
+			strcpy(stat, "on"); // Set stat "on".
+		}
+		else
+		{
+			strcpy(stat, "off"); // Set stat "off".
+		}
+
+		// Insert status into query using sprintf.
+		sprintf(query, "INSERT INTO `rpimon` (`id`, `status`, `logtime`) VALUES (NULL, '%s', CURRENT_TIME())", stat);
+
+		// Print out some data.
+		printf("Status: %s (%d)\nQuery to send: %s\n", stat, GPIO_READ(pin), query);
+
+		// Send query string to db.
+		/*if (mysql_query(connection, query))
+		{
+			finish_with_error(connection);
+		}*/
+
+		sleep(5); // Wait for 5s.
+	}
+
 	// Free the resources.
 	mysql_free_result(res);
 	mysql_close(connection);
 
-	// Define gpio 17 as input
-	//INP_GPIO(17);
-
-	char status = 0;
-	//char operation[50];
-
-	while (1)
-	{
-		status = GPIO_READ(17);
-		if (status)
-		{
-			return "on";
-		}
-		else
-		{
-			return "off";
-		}
-		//status ? "on" : "off";
-		// Insert by query.
-
-		// nog fixen dat status kan meegegeven worden in query
-		if (mysql_query(connection, "INSERT INTO `rpimon` (`id`, `status`, `logtime`) VALUES (NULL, %s, CURRENT_TIME())", status))
-		{
-			finish_with_error(connection);
-		}
-
-		sleep(10);
-	}
-
-	return EXIT_SUCCESS;
+	// Exit.
+	exit(0);
 }
