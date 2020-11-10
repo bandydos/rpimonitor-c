@@ -57,8 +57,8 @@ int main()
 		printf("\n");
 	}
 
-	int pin = 21;  // Pin.
-	INP_GPIO(pin); // Define pin as input.
+	unsigned int pin = 17; // Pin.
+	INP_GPIO(pin);		   // Define pin as input.
 
 	char stat[11];
 	char query[501];
@@ -81,10 +81,10 @@ int main()
 		printf("Status: %s (%d)\nQuery to send: %s\n", stat, GPIO_READ(pin), query);
 
 		// Send query string to db.
-		/*if (mysql_query(connection, query))
+		if (mysql_query(connection, query))
 		{
 			finish_with_error(connection);
-		}*/
+		}
 
 		sleep(5); // Wait for 5s.
 	}
